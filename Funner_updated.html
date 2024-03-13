@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="author" content="Kiran Belgal, Laura DeFalco, Alex Sapinoso, Justin Tran, Olivia Weisiger" />
+    <meta name="date" content="2024-03-12" />
+    <title>A Sentiment Analysis of Donald Trump’s Tweets</title>
+
+        <link href="Funner_updated_files/paged-0.20/css/poster-jacobs.css" rel="stylesheet" />
+    
+    
+    
+
+    
+  </head>
+  <body>
+
+
+<div class="poster-title">
+  <h1 class="title">A Sentiment Analysis of Donald Trump’s Tweets</h1>
+  <h2 class="author">Kiran Belgal, Laura DeFalco, Alex Sapinoso, Justin Tran, Olivia Weisiger</h2>
+  <h2 class="institute">UCLA Statistics and Data Science - STATS 140XP</h2>
+</div>
+
+<div id="objectives" class="section level1 block">
+<h1>Objectives</h1>
+<p>Our sentiment analysis was conducted to investigate and understand how the features
+and circumstances of each of Trump’s tweets impacted the resulting tweet’s sentiment value.
+Our analysis also aimed to explore whether there was a relationship between the tweet’s sentiment value and the actions taken against the tweet.
+To this end, our analysis was guided by the following research questions:</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>Does the time of day that the tweet was sent out affect the resulting sentiment?</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Do tweets containing content that have a high level of negative/polarizing sentiment more likely to trigger action against it (i.e. tweet is deleted)?</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>Is there a significant difference in sentiment between tweets written by Trump and his retweets?</li>
+</ol></li>
+</ul>
+</div>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>Donald Trump, the 45<sup>th</sup> president of the US, is a divisive and controversial political figure. He is well known for his prolific use of Twitter, using the platform to send over 57,000 tweets since his account was created in May 2009. Many tweets carry the sentiments of their senders. Sentiments are important to understand and analyze, as sentiment information can be used to improve products and services as well as inform decision related to marketing and reputation.</p>
+<p>Trump’s extensive tweet history provides a plethora of raw text data to perform analysis on. We hypothesized that:</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>The average sentiment of late night tweets is lower than the average sentiment of non-late night tweets.</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Tweets that contained more negative sentiments were deleted more frequently.</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>Tweets written by Trump himself tend to have different sentiments than his retweets.</li>
+</ol></li>
+</ul>
+<p>Using the bag-of-words model, we performed sentiment analysis using the provided Trump Tweets dataset to test our hypotheses.</p>
+<p><img src="Funner_updated_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<div class="figure-1-caption">
+<p>Figure 1: Word Cloud.</p>
+</div>
+</div>
+<div id="question-1" class="section level1">
+<h1>Question (1)</h1>
+<p><img src="Funner_updated_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="question-1-continued" class="section level1">
+<h1>Question (1) [continued]</h1>
+<p>To regroup our <code>hour</code> variable to better suit an ANOVA, we will base these new
+groups on our observations of the averages above:</p>
+<ul>
+<li>0 - 5: early morning</li>
+<li>6 - 9: morning</li>
+<li>10 - 16: daytime</li>
+<li>17 - 23: nighttime</li>
+</ul>
+<p>Using ANOVA to test if there are any statistically significant differences in
+sentiment scores across these time categories (hours) of the day.</p>
+<ul>
+<li>H<sub>0</sub>: There is no difference in average sentiment scores across the different hours</li>
+<li>H<sub>a</sub>: There is a significant difference</li>
+</ul>
+</div>
+<div id="answers-to-research-questions" class="section level1 block">
+<h1>Answers to Research Questions</h1>
+<ol style="list-style-type: decimal">
+<li><p>Yes, time of day does indeed affect the resulting sentiment of the tweet. Overall, tweets sent out during the morning have a higher average sentiment and tweets sent out during the daytime have a lower average sentiment.</p></li>
+<li><p>Tweets that contained comparatively more negative sentiment value tended to be deleted at higher rates.</p></li>
+<li><p>There was a significant difference in sentiment values between Trump’s tweets and Trump’s retweets. Specifically, Trump’s tweets tended to have higher sentiment values compared to his retweets.</p></li>
+</ol>
+</div>
+<div id="results-1" class="section level1">
+<h1>Results (1)</h1>
+<table>
+<caption><span id="tab:unnamed-chunk-9">Table 1: </span>Tweet counts separated by time of day.</caption>
+<thead>
+<tr class="header">
+<th align="right">Early.Morning</th>
+<th align="right">Morning</th>
+<th align="right">Day.Time</th>
+<th align="right">Night</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">12917</td>
+<td align="right">1979</td>
+<td align="right">20523</td>
+<td align="right">19483</td>
+</tr>
+</tbody>
+</table>
+<p>As one can see from the table, Trump tends to (re)tweet most often during Day Time hours and least often during Morning hours.</p>
+<table style="width:100%;">
+<caption><span id="tab:unnamed-chunk-10">Table 2: </span>ANOVA results for time of day.</caption>
+<colgroup>
+<col width="28%" />
+<col width="8%" />
+<col width="21%" />
+<col width="17%" />
+<col width="11%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Source.of.Variation</th>
+<th align="right">Df</th>
+<th align="right">Sum.of.Squares</th>
+<th align="right">Mean.Square</th>
+<th align="right">F.value</th>
+<th align="right">P.Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Time of Day</td>
+<td align="right">3</td>
+<td align="right">618</td>
+<td align="right">206.12</td>
+<td align="right">81.34</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Error</td>
+<td align="right">54898</td>
+<td align="right">139117</td>
+<td align="right">2.53</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+</tbody>
+</table>
+<p>From the summary of the model, we can see that there is a significant difference
+in average sentiment scores across different times of day.</p>
+<p><img src="Funner_updated_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>From the plot, we can see that the tweets (including retweets) have a more
+negative effect on net sentiment score in the daytime, while tweets during
+the morning have a more positive effect on average net sentiment.</p>
+<p>As an aside, we can see that the above plot mimics the overall trend of the graph plotting average net sentiment by hour.</p>
+</div>
+<div id="questionresults-2" class="section level1">
+<h1>Question/Results (2)</h1>
+<p>After performing logistic regression, we found that sentiment is a significant predictor of whether a tweet was deleted.</p>
+<table>
+<caption><span id="tab:unnamed-chunk-13">Table 3: </span>Summary table for logit model.</caption>
+<thead>
+<tr class="header">
+<th align="left">Predictors</th>
+<th align="right">Estimate</th>
+<th align="right">Std..Error</th>
+<th align="right">Z.value</th>
+<th align="right">P.Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Intercept</td>
+<td align="right">-4.227</td>
+<td align="right">0.0404</td>
+<td align="right">-104.544</td>
+<td align="right">0.00000</td>
+</tr>
+<tr class="even">
+<td align="left">Net Sentiment</td>
+<td align="right">-0.088</td>
+<td align="right">0.0238</td>
+<td align="right">-3.701</td>
+<td align="right">0.00021</td>
+</tr>
+</tbody>
+</table>
+<p>Furthermore, a 2 - sample t-test comparing the mean sentiments of deleted and non-deleted tweets indicated that the mean sentiment of deleted tweets is significantly lower than the mean sentiment of non-deleted tweets.</p>
+<p><img src="Funner_updated_files/figure-html/unnamed-chunk-15-1.png" width="1440" /></p>
+</div>
+<div id="methods" class="section level1">
+<h1>Methods</h1>
+<ol style="list-style-type: decimal">
+<li>Perform EDA on Trump Tweets dataset, identifying patterns and important features within the data.</li>
+<li>Perform data processing, cleaning, and feature engineering of the Trump Tweets dataset.
+<ul>
+<li>Transform <code>text</code> into <code>net_sentiment</code>, a categorical variable denoting whether tweet had overall positive, negative, or neutral sentiment.</li>
+<li>One hot encode all binary variables.</li>
+<li>Stratify tweets into “positive”, “negative”, or “neutral” based on respective <code>net_sentiment</code> value and create visualizations based on strata.</li>
+</ul></li>
+<li>Perform statistical analyses to evaluate hypotheses:
+<ul>
+<li><span class="math inline">\(\chi^2\)</span> test</li>
+<li>2 - sample t-test</li>
+<li>Logistic Regression</li>
+<li>ANOVA</li>
+<li>Tukey HSD</li>
+</ul></li>
+</ol>
+</div>
+<div id="supplemental-figure" class="section level1">
+<h1>Supplemental Figure</h1>
+<p>Side note: Any publicity is good publicity (even bad publicity).
+<img src="Funner_updated_files/figure-html/unnamed-chunk-17-1.png" width="960" /></p>
+</div>
+<div id="questionresults-3" class="section level1">
+<h1>Question/Results (3)</h1>
+<p>After comparing the sentiments of Trump’s own tweets and the sentiments of his retweets via a 2 - sample t-test, we found that there is a significant difference in the average sentiments between Trump’s tweets and his retweets.</p>
+<table>
+<caption><span id="tab:unnamed-chunk-18">Table 4: </span>Summary table for 2 - sample t-test.</caption>
+<thead>
+<tr class="header">
+<th align="right">T_stat</th>
+<th align="right">P.value</th>
+<th align="right">X95..CI.Lower.Bound</th>
+<th align="right">X95..CI.Upper.Bound</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">-22.069</td>
+<td align="right">0</td>
+<td align="right">-0.3608302</td>
+<td align="right">-0.3019632</td>
+</tr>
+</tbody>
+</table>
+<p>In particular, the mean sentiment of Trumps’s tweets seems to be higher than that of his retweets.</p>
+<p><img src="Funner_updated_files/figure-html/unnamed-chunk-19-1.png" width="1440" /></p>
+</div>
+
+<script type="text/javascript">
+(function() {
+  // add appropriate classes to h1 and its parent div
+  var i, d, p, s, el, els = document.getElementsByTagName('h1');
+  for (i = 0; i < els.length; i++) {
+    el = els[i]; p = el.parentNode;
+    if (p.className === 'section level1') {
+      el.append(document.createElement('hr'));
+    }
+    p.className += ' section-' + (i + 1);
+    s = p.dataset['color'];
+    if (s) el.style.color = s;
+    s = p.dataset['backgroundColor'];
+    if (s) p.style.backgroundColor = s;
+    s = p.dataset['borderColor'];
+    if (s) {
+      el.style.backgroundColor = s;
+      p.style.borderColor = s;
+    }
+    d = document.createElement('div');
+    d.className = 'content';
+    while (el.nextSibling) {
+      d.append(el.nextSibling);
+    }
+    p.append(d);
+  }
+})();
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = `https://mathjax.rstudio.com/latest/MathJax.js` + "?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+
+  </body>
+</html>
